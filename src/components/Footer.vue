@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { bus } from '../main'
 export default {
   name: 'Footer',
   props: {
@@ -14,6 +15,11 @@ export default {
     return {
       copyright: 'Copyright 2018 Vue sample'
     }
+  },
+  created: function () {
+    bus.$on('changeEmit', (data) => {
+      this.title = data
+    })
   }
 }
 </script>

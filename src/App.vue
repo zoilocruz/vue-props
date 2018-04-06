@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <app-header v-bind:title="title"></app-header>
+    <app-header v-bind:title="title" v-on:changeEmit="updateTitle($event)"></app-header>
     <app-ninjas v-bind:ninjas="ninjas"></app-ninjas>
     <app-footer v-bind:title="title"></app-footer>
+    <app-vueslots>
+      <h2 slot="title">{{ title }}</h2>
+      <p slot="text">this is a sample slots</p>
+    </app-vueslots>
     <!--<img src="./assets/logo.png">
     <router-view/>-->
   </div>
@@ -12,13 +16,16 @@
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 import Ninjas from './components/Ninjas.vue'
+import VueSlots from './components/VueSlots'
 
 export default {
   name: 'App',
   components: {
     'app-header': Header,
     'app-footer': Footer,
-    'app-ninjas': Ninjas
+    'app-ninjas': Ninjas,
+    'app-vueslots': VueSlots
+
   },
   data: function () {
     return {
@@ -31,6 +38,11 @@ export default {
         {name: 'Yoshi', speciality: 'Data Diggin', show: false}
       ],
       title: 'Vue Sample fdgdfg'
+    }
+  },
+  methods: {
+    updateTitle: function (event) {
+      this.title = event
     }
   }
 }
